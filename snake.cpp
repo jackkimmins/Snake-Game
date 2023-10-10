@@ -8,6 +8,7 @@
 #define HEIGHT 600
 #define BOX_SIZE 40
 #define SPEED 2
+const int GAP_SIZE = 4;
 
 static SDL_Window* window = nullptr;
 static SDL_Renderer* renderer = nullptr;
@@ -72,7 +73,12 @@ void Render() {
     // Draw snake.
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     for (auto &segment : snake) {
-        SDL_RenderFillRect(renderer, &segment);
+        SDL_Rect gapSegment = segment;
+        gapSegment.x += GAP_SIZE / 2;
+        gapSegment.y += GAP_SIZE / 2;
+        gapSegment.w -= GAP_SIZE;
+        gapSegment.h -= GAP_SIZE;
+        SDL_RenderFillRect(renderer, &gapSegment);
     }
 
     // Draw fruit.
